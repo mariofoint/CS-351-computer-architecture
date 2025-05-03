@@ -1,0 +1,17 @@
+Timing results with -O2 optimization - Sat May  3 12:51:21 PM PDT 2025
+=====================================================
+
+🔍 Running hash-00 with -O2...
+337.42 real	329.70 user	4.77 sys	2924 memory (KB)
+
+🔍 Running hash-01 with -O2...
+7.99 real	6.87 user	1.05 sys	2904 memory (KB)
+
+🔍 Running hash-02 with -O2...
+8.33 real	6.88 user	1.34 sys	3472 memory (KB)
+
+🔍 Running hash-03 with -O2...
+8.25 real	6.78 user	1.35 sys	3480 memory (KB)
+
+🔍 Running hash-04 with -O2...
+7.45 real	6.68 user	0.59 sys	5010092 memory (KB)

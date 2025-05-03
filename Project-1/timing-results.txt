@@ -1,0 +1,17 @@
+Timing results - Sat May  3 12:39:07 PM PDT 2025
+===========================
+
+Running hash-00...
+348.98 real	342.28 user	4.38 sys	2908 memory (KB)
+
+Running hash-01...
+17.93 real	16.44 user	1.37 sys	2900 memory (KB)
+
+Running hash-02...
+15.77 real	14.33 user	1.33 sys	2928 memory (KB)
+
+Running hash-03...
+16.32 real	14.94 user	1.24 sys	2900 memory (KB)
+
+Running hash-04...
+14.44 real	13.82 user	0.51 sys	5012392 memory (KB)

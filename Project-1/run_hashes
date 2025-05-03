@@ -1,0 +1,14 @@
+run_hashes() {
+    local output_file="${1:-timing-output.txt}"
+
+    echo "Timing hash programs - $(date)" > "$output_file"
+    echo "===============================" >> "$output_file"
+
+    for i in 00 01 02 03 04; do
+        echo -e "\n🔍 Running hash-$i..." >> "$output_file"
+        /usr/bin/time -f "%e real\t%U user\t%S sys\t%M memory (KB)" ./hash-$i >> "$output_file" 2>&1
+    done
+
+    echo -e "\n✅ Results saved to $output_file"
+}
+

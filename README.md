@@ -6,7 +6,7 @@ This repository contains projects for **CS-351: Computer Architecture** at Sonom
 
 ## Course Info
 
-- **Instructor**: Dr. Shreiner
+- **Instructor**: Dave Shreiner
 - **Semester**: Spring 2025
 - **Student**: Mario Lucido
 

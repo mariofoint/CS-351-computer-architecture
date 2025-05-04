@@ -14,5 +14,6 @@ The >> operation in hash-00 reads values from Data.txt one at a time in ASCII fo
 ### Is there an appreciable speed difference with `hash-03`?
 **No.** While `hash-03` avoids dynamic memory allocation by using a fixed-size stack array, its performance is very similar to `hash-02`, which uses `alloca()`.  
 ### Why is `hash-04`'s memory usage so much larger?
-
+Beacause of mmap the operating system loads the entire file into memor, and because it's mapped rather than read in parts the memory usage is high.
 ### What other compiler options did you try, and did they help at all?
+Nothing yet plan to try -O3 -funroll-loops and -march=native

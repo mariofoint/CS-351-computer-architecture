@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sys/mman.h>
 #include <unistd.h>
+#define DATA_PATH "."
 
 #include <barrier>
 #include <mutex>
@@ -13,9 +14,7 @@
 #include "ScopeTimer.h"
 
 using Timer = ScopeTimer<seconds>;
-
-const char *path = "./Data.bin";
-
+const char *path = DATA_PATH "/Data.bin";
 const size_t DefaultNumThreads = 8;
 
 template <typename Type> 
@@ -29,8 +28,8 @@ Type *loadData(const char *path) {
 }
 
 int main(int argc, char *argv[]) {
-	Timer timer{"main program"};
-	size_t numThreads = argc > 1 ? std::stol(argv[1]) : DefaultNumThreads;
+	  Timer timer{"main program"};
+    size_t numThreads = argc > 1 ? std::stol(argv[1]) : DefaultNumThreads;
 
     using Byte = unsigned char;
     using Bytes = Byte *;
@@ -50,7 +49,7 @@ int main(int argc, char *argv[]) {
     std::barrier barrier(numThreads);
 
     --numThreads;
-    timer.elapsed();
+     timer.elapsed();
     for (size_t id = 0; id <= numThreads; ++id) {
         std::thread t([&]() {
             while (hashID < numHashes) {
@@ -86,8 +85,8 @@ int main(int argc, char *argv[]) {
         id < numThreads ? t.detach() : t.join();
     }
 
-      {
-        Timer outputTimer{"results output"};
+        Timer{"results output"};
+	
         std::string outpath{argv[0]};
         outpath += ".txt";
         std::ofstream output{outpath};
@@ -97,5 +96,4 @@ int main(int argc, char *argv[]) {
         }
 
         output.close();
-      }
 }

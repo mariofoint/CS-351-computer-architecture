@@ -7,13 +7,28 @@
 using Count = size_t;
 using DataType = long;
 
-const DataType DefalutStartValue = -6.0;
+const DataType DefaultStartValue = -6.0;
 const Count TestSize = 1'000'000'000;
 const Count NumCheckValues = 500;
 
 //
 // --- Add your CUDA kernel implementation of iota here
+
+
+
+__global__
+void iota(size_t n, DataType* values, DataType startValue) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i >= n) return;
+
+    values[i] = i + startValue;
+}
+
+
 //
+
+
+
 
 int main(int argc, char* argv[]) {
     Count numValues = argc > 1 ? std::stol(argv[1]) : TestSize;
@@ -27,7 +42,7 @@ int main(int argc, char* argv[]) {
   
     cudaMemcpy(gpuValues, values.data(), numBytes,cudaMemcpyHostToDevice);
 
-    DataType startValue = DefalutStartValue;
+    DataType startValue = DefaultStartValue;
 
     int chunkSize = 256;
     int numChunks = int((float) numValues / chunkSize + 1);

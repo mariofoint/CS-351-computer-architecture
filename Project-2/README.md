@@ -1,7 +1,7 @@
 # Project 2: Multithreaded Hashing and Amdahl's Law
 
 ## Overview
-
+In this project, we explore how to improve the performance of a hash computation program by using multiple CPU cores, even though the structure of the data prevents vectorization. We also apply Amdahl’s Law to understand the theoretical limits of parallel speedup and analyze real-world performance data using timing instrumentation.
 ## Speedup Table
 |Thread<br>Count|Wall Clock<br>Time|User Time|System Time|Speedup|
 |:--:|--:|--:|--:|:--:|
@@ -24,11 +24,41 @@
 |80| 1.87|17.70|42.44| 7.66|
 ## Speedup Graph
 ![Speedup vs Threads](speedup.png)
+
+
 ## Amdahl’s Law Calculation
+### Calculations:
 
+- Serial setup = `0.000093595`
+- Output = `0.000000691`
+- Total = `0.03791249`
+
+So:
+
+$$
+s = \frac{0.000093595 + 0.000000691}{0.03791249} = 0.00249
+$$
+
+$$
+p = 1 - s = 0.99751
+$$
+
+Amdahl’s Law for 16 threads:
+
+$$
+\text{speedup} = \frac{1}{(1 - p) + \frac{p}{16}} = \frac{1}{0.00249 + 0.06234} = \frac{1}{0.06483} ≈ 15.42
+$$
+
+**Theoretical speedup on 16 threads ≈ 15.42×**
 ## Questions
-### Why doesn't more threads always help?
+### Notice that there is a maximum speed-up factor, but not necessarily using the most threads. Make a guess (i.e., write a short paragraph) as to why you think more threads aren't necessary better. Here's a hint: think about a group of people waiting to go through a turnstile (like at BART or Disney World). Are more people able to go through it just because there are more people? 
+Adding more threads doesn’t always help because there are limits. Only one thread can do certain things at a time, like writing to a file or using shared memory
 
-### Can we get perfect scaling?
 
-### What's the slope between 1 and 7 threads?
+### Do you think it's possible to get "perfect scaling" — meaning that the $(1-p)$ terms is zero?
+No. There’s always a small part of the program that can’t be split between threads, like setting things up or writing the results. Because of that, the program will never scale perfectly no matter how many threads we use.
+
+### in reviewing the graph of speed-ups to number of threads, note that we get pretty linear (when you plot the dots, they're pretty close to being a line) speed-up. What's the slope of that line? (Pick two values, like for one and seven threads, and do the rise-over-run thing you learned in Algebra). Does that linear trend continue as we add more threads? What do you think causes the curve to "flatten out" when we use large thread counts?
+From 1 thread to 7 threads, the speedup went from 1.00 to 4.84. That’s a slope of about: (4.84 - 1.00) / (7 - 1) = 3.84 / 6 ≈ 0.64
+it’s mostly a straight line at first. But after more threads the line flatten becuae  start fighting over memory and some parts of the program can’t run in parallel.
+

@@ -1,4 +1,8 @@
+# Project 2: Multithreaded Hashing and Amdahl's Law
 
+## Overview
+
+## Speedup Table
 |Thread<br>Count|Wall Clock<br>Time|User Time|System Time|Speedup|
 |:--:|--:|--:|--:|:--:|
 |1|14.33|13.69| 0.50|1.00|
@@ -18,5 +22,13 @@
 |64| 1.87|17.48|44.00| 7.66|
 |72| 1.86|17.71|53.49| 7.70|
 |80| 1.87|17.70|42.44| 7.66|
-
+## Speedup Graph
 ![Speedup vs Threads](speedup.png)
+## Amdahl’s Law Calculation
+
+## Questions
+### Why doesn't more threads always help?
+
+### Can we get perfect scaling?
+
+### What's the slope between 1 and 7 threads?
